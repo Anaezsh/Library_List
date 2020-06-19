@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
 }
-.search__input {
+.search__input, #bread {
   margin-bottom: 20px;
 }
 .text_marginRight {

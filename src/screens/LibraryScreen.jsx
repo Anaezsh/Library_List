@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
-import {Layout, Typography} from 'antd';
+import {Layout, Breadcrumb} from 'antd';
+import {Title} from '../utils/elements'
 
 import '../app.css';
 
@@ -10,8 +11,6 @@ import {getMappedLibrary} from '../utils/library';
 
 import TEXT from '../const';
 
-const {Title} = Typography;
-
 const LibraryScreen = () => {
   const {selectedLibrary} = useContext(LibraryContext);
   const mappedLibrary = getMappedLibrary(selectedLibrary);
@@ -19,6 +18,12 @@ const LibraryScreen = () => {
 
   return (
     <Layout className="main">
+
+      <Breadcrumb separator=">" id="bread">
+        <Breadcrumb.Item href="/">{TEXT.list}</Breadcrumb.Item>
+        <Breadcrumb.Item>{territory}</Breadcrumb.Item>
+      </Breadcrumb>
+
       <Title level={4}>{territory}</Title>
 
       {Object.keys(library).map(key => {
