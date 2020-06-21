@@ -6,11 +6,21 @@ import '../app.css';
 
 import Spinner from '../components/Spinner';
 import LibraryListItem from '../components/LibraryListItem';
+import DropDownList from '../components/DropDownList';
 
 import {LibraryContext} from '../app';
 import {getData} from '../api';
 
-import TEXT from '../../src/const';
+import {TEXT} from '../constants';
+
+import {
+  getSortMenuList,
+  sortByLibraryNumber,
+  sortByTerritory,
+  filterLibraryListBySearchText,
+} from '../utils/sort';
+
+const sortMenuList = getSortMenuList();
 
 const ListScreen = () => {
   const {setSelectedLibrary} = useContext(LibraryContext);
@@ -18,6 +28,7 @@ const ListScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [listToRender, setListToRender] = useState(libraryList);
   const [searchText, setSearchText] = useState('');
+  const [sortMode, setSortMode] = useState(sortMenuList[0][0]);
 
   useEffect(() => {
     getData(setIsLoading).then(res => {
@@ -28,12 +39,30 @@ const ListScreen = () => {
 
   useEffect(() => {
     if (!searchText) setListToRender(libraryList);
-  }, [searchText]);
+  }, [searchText, libraryList]);
+
+  useEffect(() => {
+    switch (sortMode) {
+      case sortMenuList[1][0]:
+        setListToRender([...listToRender].sort(sortByTerritory));
+        break;
+      case sortMenuList[2][0]:
+        setListToRender([...listToRender].sort(sortByLibraryNumber));
+        break;
+      case sortMenuList[0][0]:
+      default:
+        if (searchText) {
+          setListToRender(filterLibraryListBySearchText(libraryList, searchText));
+        } else {
+          setListToRender(libraryList);
+        }
+    }
+  }, [sortMode]);
 
   const onSearchClick = (value) => {
     if (!value) return;
 
-    setListToRender(libraryList.filter(item => item.territory.toLowerCase().startsWith(value.toLowerCase())));
+    setListToRender(filterLibraryListBySearchText(libraryList, value));
   };
 
   const onSearchTextChange = (e) => {
@@ -69,6 +98,12 @@ const ListScreen = () => {
         size="large"
         onSearch={onSearchClick}
         className="search__input"
+      />
+
+      <DropDownList
+          itemKey={sortMode}
+          setItemKey={setSortMode}
+          list={sortMenuList}
       />
 
       <List

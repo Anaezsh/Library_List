@@ -1,8 +1,12 @@
-const TEXT = {
+export const TEXT = {
   title:'СВОД ГОДОВЫХ СВЕДЕНИЙ  ОБ ОБЩЕДОСТУПНЫХ (ПУБЛИЧНЫХ) БИБЛИОТЕКАХ СИСТЕМЫ МИНКУЛЬТУРЫ РОССИИ',
   enterTerritory: 'Введите регион',
   search: 'Поиск',
   list: 'Список регионов',
+  sorting: 'Сортировка',
+  byDefault: 'по умолчанию',
+  byAlphabeticalOrder: 'по списку регионов',
+  byLibraryNumber: 'по числу библиотек',
 
   fullName:'Полное наименование',
   address: 'Адрес',
@@ -16,5 +20,3 @@ const TEXT = {
   visiters: 'Посетителей',
   internetVisiters: 'Интернет посетителей',
 };
-
-export default TEXT;

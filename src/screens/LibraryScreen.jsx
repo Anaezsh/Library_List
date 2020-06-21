@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Layout, Breadcrumb} from 'antd';
-import {Title} from '../utils/elements'
+import {Title, BreadcrumbItem} from '../utils/elements'
 
 import '../app.css';
 
@@ -9,7 +9,7 @@ import TitleValueRow from '../components/TitleValueRow';
 import {LibraryContext} from '../app';
 import {getMappedLibrary} from '../utils/library';
 
-import TEXT from '../const';
+import {TEXT} from '../constants';
 
 const LibraryScreen = () => {
   const {selectedLibrary} = useContext(LibraryContext);
@@ -20,8 +20,8 @@ const LibraryScreen = () => {
     <Layout className="main">
 
       <Breadcrumb separator=">" id="bread">
-        <Breadcrumb.Item href="/">{TEXT.list}</Breadcrumb.Item>
-        <Breadcrumb.Item>{territory}</Breadcrumb.Item>
+        <BreadcrumbItem href="/">{TEXT.list}</BreadcrumbItem>
+        <BreadcrumbItem>{territory}</BreadcrumbItem>
       </Breadcrumb>
 
       <Title level={4}>{territory}</Title>

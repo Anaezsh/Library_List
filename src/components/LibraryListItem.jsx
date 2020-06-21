@@ -1,11 +1,11 @@
 import React from 'react';
 import {Button} from 'antd';
 import {Link} from 'react-router-dom';
-import {Item} from '../utils/elements';
+import {ListItem} from '../utils/elements';
 
 import '../app.css';
 
-import TEXT from '../const';
+import {TEXT} from '../constants';
 
 const LibraryListItem = (props) => {
   const {item, onClick} = props;
@@ -16,13 +16,13 @@ const LibraryListItem = (props) => {
   } = item;
 
   return (
-    <Item>
+    <ListItem>
       <Button type="link" onClick={onClick}>
         <Link to={`/${kopuk}`}>
           {territory}, {TEXT.libraries.toLowerCase()}: {libraries}
         </Link>
       </Button>
-    </Item>
+    </ListItem>
   );
 };
 
