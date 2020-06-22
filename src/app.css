@@ -14,3 +14,12 @@
 .sort__text {
   margin-bottom: 20px;
 }
+.sort__text_title {
+  margin-right: 10px;
+}
+.sort__icon {
+  margin-left: 10px;
+}
+.sort__menu {
+  width: 200px;
+}

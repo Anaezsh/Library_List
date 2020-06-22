@@ -22,7 +22,7 @@ const DropDownList = (props) => {
 
   const renderMenu = () => {
       return (
-          <Menu onClick={onMenuClick}>
+          <Menu onClick={onMenuClick} className="sort__menu">
               {list.map(item => {
                   const [key, value] = item;
 
@@ -40,10 +40,15 @@ const DropDownList = (props) => {
           visible={isVisible}
           onVisibleChange={handleVisibleChange}
       >
-          <Text className="sort__text">
-              {TEXT.sorting}: {listMap[itemKey]}
-              <Icon type="down" />
-          </Text>
+          <div className="sort__text">
+              <Text className="sort__text_title">
+                  {TEXT.sorting}:
+              </Text>
+              <Text type="secondary">
+                  {listMap[itemKey]}
+              </Text>
+              <Icon type="down" className="sort__icon"/>
+          </div>
       </Dropdown>
   );
 };

@@ -38,31 +38,25 @@ const ListScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (!searchText) setListToRender(libraryList);
-  }, [searchText, libraryList]);
+    const list = searchText ? [...listToRender] : [...libraryList];
 
-  useEffect(() => {
     switch (sortMode) {
       case sortMenuList[1][0]:
-        setListToRender([...listToRender].sort(sortByTerritory));
+        setListToRender(list.sort(sortByTerritory));
         break;
       case sortMenuList[2][0]:
-        setListToRender([...listToRender].sort(sortByLibraryNumber));
+        setListToRender(list.sort(sortByLibraryNumber));
         break;
       case sortMenuList[0][0]:
       default:
-        if (searchText) {
-          setListToRender(filterLibraryListBySearchText(libraryList, searchText));
-        } else {
-          setListToRender(libraryList);
-        }
+        setListToRender(list);
     }
-  }, [sortMode]);
+  }, [sortMode, searchText]);
 
   const onSearchClick = (value) => {
     if (!value) return;
 
-    setListToRender(filterLibraryListBySearchText(libraryList, value));
+    setListToRender(filterLibraryListBySearchText(listToRender, value));
   };
 
   const onSearchTextChange = (e) => {
